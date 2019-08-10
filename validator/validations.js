@@ -1,5 +1,5 @@
 const { replacer } = require('../utils/helpers')
-const { validations: messages, fields, translateField } = require('../i18n')
+const { validations: messages, translateField } = require('../i18n')
 
 const required = (attribute, value, data, lang) => {
   if (value) return true
