@@ -1,4 +1,4 @@
-const userService = require('../services/userService')
+const userService = require('./userService')
 
 const index = (req, res) => res.json({ users: userService.getUsers() })
 
