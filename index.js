@@ -10,4 +10,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(router)
 
+app.disable('x-powered-by')
+
 app.listen(process.env.APP_PORT)
