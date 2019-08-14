@@ -22,7 +22,7 @@ const validate = async (data, rules, lang = 'en') => {
 
       const validationResult = validations[validation].apply(null, args)
 
-      if (validationResult !== true) {
+      if (typeof validationResult === 'string') {
         const message = validationResult.replace(
           ':attribute',
           translateField(key, lang)
@@ -30,6 +30,8 @@ const validate = async (data, rules, lang = 'en') => {
 
         errors[key] = message
 
+        break
+      } else if (validationResult === false) {
         break
       }
     }
