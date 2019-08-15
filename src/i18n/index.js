@@ -8,7 +8,9 @@ const fields = {
   pt: require('./pt/fields'),
 }
 
-const translateField = (field, lang) => fields[lang][field] || field
+const translateField = (field, lang) => {
+  return fields[lang][field] || field
+}
 
 module.exports = {
   validations,

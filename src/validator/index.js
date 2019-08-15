@@ -12,7 +12,7 @@ const validate = async (data, rules, lang = 'en') => {
     const splittedRules = rule.split(separator)
 
     for (let validation of splittedRules) {
-      const args = [key, value, data, lang]
+      const args = [{ key, value, data, lang }]
       const argsIndex = validation.indexOf(':')
 
       if (argsIndex !== -1) {

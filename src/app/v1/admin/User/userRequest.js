@@ -1,4 +1,4 @@
-const validator = require('../../validator')
+const validator = require('../../../../validator')
 
 const validate = (req, res, next) => {
   const rules = {
@@ -11,18 +11,10 @@ const validate = (req, res, next) => {
   validator
     .validate(req.body, rules)
     .then(next)
-    .catch(errors => res.status(400).json(errors))
+    .catch(errors => res.status(422).json(errors))
 }
 
-const prepareForValidation = (req, res, next) => {
-  // const words = req.body.name.split(' ')
-
-  // req.body.name = `${words[0]} ${words[1]}`
-
-  // req.body.email = req.body.email.toLowerCase()
-
-  next()
-}
+const prepareForValidation = (req, res, next) => next()
 
 module.exports = {
   validate,

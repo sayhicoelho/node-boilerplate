@@ -1,20 +1,13 @@
-const {
-  replacer,
-  isInteger,
-  isEmail,
-  isHost,
-  isURL,
-} = require('../utils/helpers')
+const helpers = require('../utils/helpers')
+const i18n = require('../i18n')
 
-const { validations: messages, translateField } = require('../i18n')
-
-const required = (attribute, value, data, lang) => {
+const required = ({ attribute, value, data, lang }) => {
   if (value) return true
 
-  return messages[lang].required
+  return i18n.validations[lang].required
 }
 
-const nullable = (attribute, value, data, lang) => {
+const nullable = ({ attribute, value, data, lang }) => {
   if (!value) {
     data[attribute] = null
 
@@ -24,57 +17,57 @@ const nullable = (attribute, value, data, lang) => {
   return true
 }
 
-const string = (attribute, value, data, lang) => {
+const string = ({ attribute, value, data, lang }) => {
   if (typeof value === 'string') return true
 
-  return messages[lang].string
+  return i18n.validations[lang].string
 }
 
-const integer = (attribute, value, data, lang) => {
-  if (isInteger(value)) return true
+const integer = ({ attribute, value, data, lang }) => {
+  if (helpers.isInteger(value)) return true
 
-  return messages[lang].integer
+  return i18n.validations[lang].integer
 }
 
-const email = (attribute, value, data, lang) => {
-  if (isEmail(value)) return true
+const email = ({ attribute, value, data, lang }) => {
+  if (helpers.isEmail(value)) return true
 
-  return messages[lang].email
+  return i18n.validations[lang].email
 }
 
-const host = (attribute, value, data, lang) => {
-  if (isHost(value)) return true
+const host = ({ attribute, value, data, lang }) => {
+  if (helpers.isHost(value)) return true
 
-  return messages[lang].host
+  return i18n.validations[lang].host
 }
 
-const url = (attribute, value, data, lang) => {
-  if (isURL(value)) return true
+const url = ({ attribute, value, data, lang }) => {
+  if (helpers.isURL(value)) return true
 
-  return messages[lang].url
+  return i18n.validations[lang].url
 }
 
-const min = (attribute, value, data, lang, min) => {
+const min = ({ attribute, value, data, lang }, min) => {
   if (value.length >= min) return true
 
-  return replacer(messages[lang].min, {
+  return helpers.replacer(i18n.validations[lang].min, {
     min,
   })
 }
 
-const max = (attribute, value, data, lang, max) => {
+const max = ({ attribute, value, data, lang }, max) => {
   if (value.length <= max) return true
 
-  return replacer(messages[lang].max, {
+  return helpers.replacer(i18n.validations[lang].max, {
     max,
   })
 }
 
-const match = (attribute, value, data, lang, field) => {
+const match = ({ attribute, value, data, lang }, field) => {
   if (value == data[field]) return true
 
-  return replacer(messages[lang].match, {
-    field: translateField(field, lang),
+  return helpers.replacer(i18n.validations[lang].match, {
+    field: i18n.translateField(field, lang),
   })
 }
 
