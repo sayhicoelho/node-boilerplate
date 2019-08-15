@@ -1,6 +1,7 @@
 const postService = require('../../../../services/postService')
 
 const index = (req, res) => {
+  // TODO: Implement pagination
   const posts = postService.getAll()
 
   res.json({ posts })

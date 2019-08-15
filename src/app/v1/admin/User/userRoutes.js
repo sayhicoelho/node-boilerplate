@@ -4,9 +4,9 @@ const userRequest = require('./userRequest')
 
 const router = Router()
 
-router.get('/user', userController.index)
-router.get('/user/:id', userController.show)
-router.post('/user', userRequest.validate, userController.store)
-router.delete('/user/:id', userController.destroy)
+router.get('/users', userController.index)
+router.get('/users/:id', userController.show)
+router.post('/users', userRequest.validate, userController.store)
+router.delete('/users/:id', userController.destroy)
 
 module.exports = router

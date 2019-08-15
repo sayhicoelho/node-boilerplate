@@ -3,7 +3,7 @@ const postController = require('./postController')
 
 const router = Router()
 
-router.get('/post', postController.index)
-router.get('/post/:id', postController.show)
+router.get('/posts', postController.index)
+router.get('/posts/:id', postController.show)
 
 module.exports = router

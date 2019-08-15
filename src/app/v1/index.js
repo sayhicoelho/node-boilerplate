@@ -4,14 +4,13 @@ const adminRoutes = Router()
 const accountRoutes = Router()
 const webRoutes = Router()
 
-adminRoutes.use(require('./admin/Post/postRoutes'))
-adminRoutes.use(require('./admin/Profile/profileRoutes'))
-adminRoutes.use(require('./admin/Role/roleRoutes'))
-adminRoutes.use(require('./admin/User/userRoutes'))
+adminRoutes.use(require('./admin/post/postRoutes'))
+adminRoutes.use(require('./admin/role/roleRoutes'))
+adminRoutes.use(require('./admin/user/userRoutes'))
 
-accountRoutes.use(require('./account/Profile/profileRoutes'))
+accountRoutes.use(require('./account/profile/profileRoutes'))
 
-webRoutes.use(require('./web/Post/postRoutes'))
+webRoutes.use(require('./web/post/postRoutes'))
 
 module.exports = {
   adminRoutes,

@@ -4,9 +4,9 @@ const postRequest = require('./postRequest')
 
 const router = Router()
 
-router.get('/post', postController.index)
-router.get('/post/:id', postController.show)
-router.post('/post', postRequest.validate, postController.store)
-router.delete('/post/:id', postController.destroy)
+router.get('/posts', postController.index)
+router.get('/posts/:id', postController.show)
+router.post('/posts', postRequest.validate, postController.store)
+router.delete('/posts/:id', postController.destroy)
 
 module.exports = router

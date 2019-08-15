@@ -4,9 +4,9 @@ const roleRequest = require('./roleRequest')
 
 const router = Router()
 
-router.get('/role', roleController.index)
-router.get('/role/:id', roleController.show)
-router.post('/role', roleRequest.validate, roleController.store)
-router.delete('/role/:id', roleController.destroy)
+router.get('/roles', roleController.index)
+router.get('/roles/:id', roleController.show)
+router.post('/roles', roleRequest.validate, roleController.store)
+router.delete('/roles/:id', roleController.destroy)
 
 module.exports = router
