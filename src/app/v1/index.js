@@ -11,7 +11,7 @@ adminRoutes.use(require('./admin/User/userRoutes'))
 
 accountRoutes.use(require('./account/Profile/profileRoutes'))
 
-webRoutes.use(require('./web/Blog/blogRoutes'))
+webRoutes.use(require('./web/Post/postRoutes'))
 
 module.exports = {
   adminRoutes,
