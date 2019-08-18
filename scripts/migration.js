@@ -46,15 +46,16 @@ const migrationsDir = path.join(
 )
 
 const actions = {
-  create() {
+  async create() {
     const now = Date.now()
     const migration = args[1]
 
     if (migration) {
-      fs.writeFileSync(
-        path.join(migrationsDir, `${now}_${migration}.js`),
-        template
-      )
+      const file = `${now}_${migration}.js`
+
+      fs.writeFileSync(path.join(migrationsDir, file), template)
+
+      console.log(`Migration ${file} created`)
     } else {
       console.error("Invalid migration's name.") && db.end()
     }
@@ -136,29 +137,55 @@ function migrate(param) {
   })
 }
 
-async function execute() {
-  if (action in actions) {
-    const result = await orm.checkIfExists(
-      'information_schema.TABLES',
-      'WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
-      [config.database.database, migrationsTable]
+async function execute(bypass = false) {
+  if (!bypass && process.env.NODE_ENV === 'production') {
+    console.log(
+      "Caution! You're running in production mode. Are you sure you want to proceed (yes|no)?"
     )
 
-    const { rowsCount } = result[0]
+    const ask = async () => {
+      let answer = process.stdin.read()
 
-    if (rowsCount === 0) {
-      await orm.createTable(migrationsTable, {
-        migration: {
-          type: 'VARCHAR(50)',
-        },
-      })
+      if (answer) {
+        answer = answer.toString().trim()
+
+        if (answer == 'yes') {
+          await execute(true)
+        } else {
+          db.end()
+        }
+
+        process.exit(0)
+      }
     }
 
-    actions[action]()
+    process.stdin.on('readable', ask)
   } else {
-    console.error(`Action ${action} is not valid. Did you mean create|up|down?`)
+    if (action in actions) {
+      const result = await orm.checkIfExists(
+        'information_schema.TABLES',
+        'WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
+        [config.database.database, migrationsTable]
+      )
 
-    db.end()
+      const { rowsCount } = result[0]
+
+      if (rowsCount === 0) {
+        await orm.createTable(migrationsTable, {
+          migration: {
+            type: 'VARCHAR(50)',
+          },
+        })
+      }
+
+      await actions[action]()
+    } else {
+      console.error(
+        `Action ${action} is not valid. Did you mean create|up|down|reset?`
+      )
+
+      db.end()
+    }
   }
 }
 
