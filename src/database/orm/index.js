@@ -83,6 +83,10 @@ function dropColumns(table, columns) {
   return utils.query(sql)
 }
 
+function rawQuery(sql, values = []) {
+  return utils.query(sql, values)
+}
+
 module.exports = {
   createTable,
   dropTable,
@@ -91,4 +95,5 @@ module.exports = {
   addRow,
   dropRow,
   dropColumns,
+  rawQuery
 }
