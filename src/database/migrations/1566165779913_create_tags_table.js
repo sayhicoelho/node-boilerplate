@@ -1,7 +1,7 @@
 const orm = require('../orm')
 
 function up() {
-  return orm.createTable('post_categories', {
+  return orm.createTable('tags', {
     primaryKey: 'id',
     timestamps: true,
     columns: {
@@ -9,14 +9,6 @@ function up() {
         type: 'int',
         unsigned: true,
         autoIncrement: true,
-      },
-      postId: {
-        type: 'int',
-        unsigned: true,
-        foreign: {
-          ref: ['posts', 'id'],
-          onDelete: 'cascade',
-        },
       },
       name: {
         type: 'varchar(50)',
@@ -30,7 +22,7 @@ function up() {
 }
 
 function down() {
-  return orm.dropTable('post_categories')
+  return orm.dropTable('tags')
 }
 
 module.exports = {
