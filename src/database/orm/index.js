@@ -15,11 +15,9 @@ function createTable(table, { primaryKey, timestamps, columns }) {
     rawColumns.push(utils.getRawOptions(column, options))
   }
 
-  const sql = `CREATE TABLE ${table} (
-      ${rawColumns.join(',')},
-      PRIMARY KEY (${primaryKey})${
-    foreigns.length > 0 ? ', ' + foreigns.join(',') : ''
-  })`
+  const sql = `CREATE TABLE ${table} (${rawColumns.join(',')},
+    PRIMARY KEY (${primaryKey})
+    ${foreigns.length > 0 ? ', ' + foreigns.join(',') : ''})`
 
   return utils.query(sql)
 }
