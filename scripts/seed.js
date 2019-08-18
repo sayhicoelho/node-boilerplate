@@ -1,3 +1,13 @@
+/**
+ * This script populates the database with data.
+ *
+ * Example usage:
+ *
+ * > yarn seed create addUsersTableSeeder
+ * > yarn populate
+ * > yarn populate --name=addUsersTableSeeder
+ */
+
 const fs = require('fs')
 const path = require('path')
 const { db } = require('../src/database')

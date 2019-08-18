@@ -1,3 +1,17 @@
+/**
+ * This script creates database migrations to the project.
+ *
+ * Example usage:
+ *
+ * > yarn migration create create_users_table
+ * > yarn migration up
+ * > yarn migration down
+ * > yarn migration reset
+ * > yarn migration up --step-=1
+ * > yarn migration down --step-=1
+ * > yarn migration reset --step-=1
+ */
+
 const fs = require('fs')
 const path = require('path')
 const { db } = require('../src/database')
