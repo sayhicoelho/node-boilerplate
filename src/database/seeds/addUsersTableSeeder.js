@@ -1,9 +1,11 @@
-const { db } = require('..')
+const orm = require('../orm')
 
-const sql = 'INSERT INTO users (name) VALUES (?)'
+async function run() {
+  return orm.addRow('users', {
+    name: 'Example',
+    email: 'example@example.com',
+    password: 'secret',
+  })
+}
 
-db.query(sql, ['Renan Coelho'], (err, rows) => {
-  console.log(rows)
-
-  db.close()
-})
+module.exports = run

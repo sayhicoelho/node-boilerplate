@@ -57,7 +57,7 @@ const actions = {
 
       console.log(`Migration ${file} created`)
     } else {
-      console.error("Invalid migration's name.") && db.end()
+      console.error('Invalid migration name.')
     }
 
     db.end()

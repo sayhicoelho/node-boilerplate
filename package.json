@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index",
     "start": "node index",
-    "migration": "node scripts/migration"
+    "migration": "node scripts/migration",
+    "seed": "node scripts/seed"
   },
   "dependencies": {
     "cors": "^2.8.5",
