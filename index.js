@@ -1,16 +1,15 @@
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
+const moment = require('moment-timezone')
 const router = require('./routes')
 const config = require('./config')
+const common = require('./middleware/commonMiddleware')
 const { app, http } = require('./bootstrap')
 const { io } = require('./services/socketService')
 const sockets = require('./sockets')
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, 'public')))
+moment.tz.setDefault('UTC')
 
 if (config.app.env != 'production') {
   const logger = require('morgan')
@@ -18,6 +17,11 @@ if (config.app.env != 'production') {
   app.use(logger('dev'))
 }
 
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(common)
 app.use(router)
 
 app.disable('x-powered-by')

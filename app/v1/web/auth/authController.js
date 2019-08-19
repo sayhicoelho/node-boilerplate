@@ -1,5 +1,6 @@
 const mailService = require('../../../../services/mailService')
 const { io } = require('../../../../services/socketService')
+const { __ } = require('../../../../i18n')
 
 const login = (req, res) => {
   res.json({ success: true })
@@ -7,7 +8,7 @@ const login = (req, res) => {
 
 const register = (req, res) => {
   const data = {
-    greeting: 'Dear User',
+    greeting: __('hello', res.locals.lang),
   }
 
   mailService.send(
