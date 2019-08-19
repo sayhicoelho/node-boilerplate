@@ -174,7 +174,7 @@ function migrate(param) {
 }
 
 async function execute(bypass = false) {
-  if (!bypass && process.env.NODE_ENV === 'production') {
+  if (!bypass && config.app.env == 'production') {
     console.log(
       "Caution! You're running in production mode. Are you sure you want to proceed (yes|no)?"
     )

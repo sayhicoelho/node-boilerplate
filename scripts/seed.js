@@ -11,6 +11,7 @@
 const fs = require('fs')
 const path = require('path')
 const { db } = require('../database')
+const config = require('../config')
 const args = process.argv.splice(2)
 const [action] = args
 
@@ -85,7 +86,7 @@ const actions = {
 }
 
 async function execute(bypass = false) {
-  if (!bypass && process.env.NODE_ENV === 'production') {
+  if (!bypass && config.app.env == 'production') {
     console.log(
       "Caution! You're running in production mode. Are you sure you want to proceed (yes|no)?"
     )

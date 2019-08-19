@@ -9,12 +9,15 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
+
+if (config.app.env != 'production') {
+  const logger = require('morgan')
+
+  app.use(logger('dev'))
+}
+
 app.use(router)
 
 app.disable('x-powered-by')
 
 app.listen(config.app.port)
-
-// tenho que parar de pensar no front-end! o back-end não depende do front-end, cacete!
-// ao invés de /v1/blog, vou criar apenas um endpoint para /v1/posts e inserir queries
-// opcionais para dizer quais campos eu quero na minha consulta, por ex: /v1/posts?per_page=20&page=1
