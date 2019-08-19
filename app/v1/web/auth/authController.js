@@ -1,16 +1,20 @@
-const { dispatch } = require('../../../../services/jobService')
+const mailService = require('../../../../services/mailService')
 
 const login = (req, res) => {
   res.json({ success: true })
 }
 
 const register = (req, res) => {
-  dispatch('email', {
-    from: 'test',
-    to: 'test',
-    subject: 'test',
-    body: '<h1>test!</h1>'
-  })
+  const data = {
+    greeting: 'Dear User',
+  }
+
+  mailService.send(
+    'registered@user.com',
+    'Thank you for registering!',
+    'register',
+    data
+  )
 
   res.json({ register: true })
 }
