@@ -11,14 +11,14 @@ function up() {
         autoIncrement: true,
       },
       name: {
-        type: 'varchar(255)',
+        type: 'varchar(50)',
       },
       email: {
-        type: 'varchar(255)',
+        type: 'varchar(50)',
         unique: true,
       },
       password: {
-        type: 'varchar(255)',
+        type: 'varchar(60)',
       },
     },
   })

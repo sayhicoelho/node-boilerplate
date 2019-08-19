@@ -2,7 +2,11 @@ const validator = require('../../../../validator')
 
 const validate = (req, res, next) => {
   const rules = {
-    body: 'required|string|max:1000',
+    title: 'required|string|max:100',
+    slug: 'required|slug|max:100',
+    excerpt: 'required|string|max:100',
+    body: 'required|string',
+    cover: 'required|image',
   }
 
   validator

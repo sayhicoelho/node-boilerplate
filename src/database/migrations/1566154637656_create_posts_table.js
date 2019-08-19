@@ -18,6 +18,14 @@ function up() {
           onDelete: 'cascade',
         },
       },
+      categoryId: {
+        type: 'int',
+        unsigned: true,
+        foreign: {
+          ref: ['categories', 'id'],
+          onDelete: 'cascade',
+        },
+      },
       title: {
         type: 'varchar(100)',
         default: "'My title goes here'",
