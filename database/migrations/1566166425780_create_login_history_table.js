@@ -8,7 +8,7 @@ function up() {
       id: {
         type: 'int',
         unsigned: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       userId: {
         type: 'int',

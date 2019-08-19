@@ -43,5 +43,5 @@ module.exports = {
   isEmail,
   isHost,
   isURL,
-  hash
+  hash,
 }

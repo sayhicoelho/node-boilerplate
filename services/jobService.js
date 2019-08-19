@@ -7,5 +7,5 @@ const dispatch = (to, data) => {
 }
 
 module.exports = {
-  dispatch
+  dispatch,
 }

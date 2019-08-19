@@ -122,5 +122,5 @@ module.exports = {
   addRows,
   dropRow,
   dropColumns,
-  rawQuery
+  rawQuery,
 }

@@ -1,6 +1,6 @@
 const messages = {
   en: require('./en/messages'),
-  pt: require('./pt/messages')
+  pt: require('./pt/messages'),
 }
 
 const validations = {
@@ -25,5 +25,5 @@ module.exports = {
   validations,
   fields,
   translateField,
-  __
+  __,
 }

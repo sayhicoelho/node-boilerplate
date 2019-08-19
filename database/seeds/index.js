@@ -7,5 +7,5 @@ async function populate() {
 }
 
 module.exports = {
-  populate
+  populate,
 }

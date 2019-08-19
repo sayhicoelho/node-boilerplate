@@ -13,10 +13,10 @@ async function run() {
     {
       name: 'User',
       slug: 'user',
-    }
+    },
   ])
 }
 
 module.exports = {
-  run
+  run,
 }

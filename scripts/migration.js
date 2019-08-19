@@ -52,12 +52,7 @@ module.exports = {
 
 const migrationsTable = 'migrations'
 
-const migrationsDir = path.join(
-  __dirname,
-  '..',
-  'database',
-  'migrations'
-)
+const migrationsDir = path.join(__dirname, '..', 'database', 'migrations')
 
 const actions = {
   async create() {
@@ -219,7 +214,7 @@ async function execute(bypass = false) {
             migration: {
               type: 'VARCHAR(50)',
             },
-          }
+          },
         })
       }
 
