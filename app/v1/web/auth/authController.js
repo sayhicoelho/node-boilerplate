@@ -1,4 +1,5 @@
 const mailService = require('../../../../services/mailService')
+const { io } = require('../../../../services/socketService')
 
 const login = (req, res) => {
   res.json({ success: true })
@@ -15,6 +16,8 @@ const register = (req, res) => {
     'register',
     data
   )
+
+  io.emit('rest message', 'rest message sent')
 
   res.json({ register: true })
 }

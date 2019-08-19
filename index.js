@@ -3,7 +3,9 @@ const express = require('express')
 const cors = require('cors')
 const router = require('./routes')
 const config = require('./config')
-const app = express()
+const { app, http } = require('./bootstrap')
+const { io } = require('./services/socketService')
+const sockets = require('./sockets')
 
 app.use(cors())
 app.use(express.json())
@@ -20,4 +22,10 @@ app.use(router)
 
 app.disable('x-powered-by')
 
-app.listen(config.app.port)
+io.on('connection', socket => {
+  console.log(`${socket.id} connected.`)
+
+  sockets.handle(socket)
+})
+
+http.listen(config.app.port)

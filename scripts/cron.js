@@ -1,6 +1,6 @@
-const cron = require('node-cron');
-const loggerTask = require('../tasks/loggerTask');
+const cron = require('node-cron')
+const loggerTask = require('../tasks/loggerTask')
 
-cron.schedule('* * * * *', () => {
-  loggerTask.run();
-});
+cron.schedule('* * * * * *', () => {
+  loggerTask.run()
+})

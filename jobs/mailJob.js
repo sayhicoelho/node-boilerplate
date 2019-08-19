@@ -1,4 +1,5 @@
 const { transporter } = require('../services/mailService')
+const { io } = require('../services/socketService')
 
 const handle = ({ data }, done) => {
   const mailOptions = {
@@ -7,6 +8,8 @@ const handle = ({ data }, done) => {
     subject: data.subject,
     html: data.html,
   }
+
+  io.emit('job message', 'job message sent')
 
   transporter.sendMail(mailOptions, (err, info) => {
     done(err ? new Error(err) : '')
