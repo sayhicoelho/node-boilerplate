@@ -72,19 +72,13 @@ const actions = {
 
         resolve()
       } else {
-        fs.readdir(seedsDir, async (err, seeds) => {
-          for (let seed of seeds) {
-            await require(path.join(seedsDir, seed))()
+        await require(path.join(seedsDir)).populate()
 
-            console.log(`${seed} populated`)
-          }
+        console.log(`Seed(s) populated`)
 
-          console.log(`${seeds.length} seed(s) populated`)
+        db.end()
 
-          db.end()
-
-          resolve()
-        })
+        resolve()
       }
     })
   },

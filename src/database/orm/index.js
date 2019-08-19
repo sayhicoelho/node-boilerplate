@@ -62,9 +62,35 @@ function addRow(table, columns) {
   }
 
   const strColumnNames = columnNames.join(',')
-  const strColumnValues = columnValues.map(c => '?').join(',')
+  const strColumnValues = columnValues.map(() => '?').join(',')
+  const sql = `INSERT INTO ${table} (${strColumnNames}) VALUES (${strColumnValues})`
 
-  let sql = `INSERT INTO ${table} (${strColumnNames}) VALUES (${strColumnValues})`
+  return utils.query(sql, columnValues)
+}
+
+function addRows(table, rows) {
+  const fields = Object.keys(rows[0])
+  const strColumnNames = fields.join(',')
+  const rowValues = []
+  const columnValues = []
+
+  for (let columns of rows) {
+    const values = []
+
+    for (let column in columns) {
+      const value = columns[column]
+
+      values.push(value)
+    }
+
+    rowValues.push(values.map(() => '?').join(','))
+
+    columnValues.push(...values)
+  }
+
+  const strColumnValues = rowValues.join('),(')
+
+  const sql = `INSERT INTO ${table} (${strColumnNames}) VALUES (${strColumnValues})`
 
   return utils.query(sql, columnValues)
 }
@@ -93,6 +119,7 @@ module.exports = {
   addColumns,
   checkIfExists,
   addRow,
+  addRows,
   dropRow,
   dropColumns,
   rawQuery
