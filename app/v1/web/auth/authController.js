@@ -1,9 +1,18 @@
+const { dispatch } = require('../../../../services/jobService')
+
 const login = (req, res) => {
   res.json({ success: true })
 }
 
 const register = (req, res) => {
-  res.json({ success: true })
+  dispatch('email', {
+    from: 'test',
+    to: 'test',
+    subject: 'test',
+    body: '<h1>test!</h1>'
+  })
+
+  res.json({ register: true })
 }
 
 const forgotPassword = (req, res) => {
