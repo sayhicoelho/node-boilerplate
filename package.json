@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon index",
     "start": "node index",
+    "cron": "node scripts/cron",
     "migration": "node scripts/migration",
     "seed": "node scripts/seed"
   },
@@ -16,7 +17,8 @@
     "express": "^4.17.1",
     "glob": "^7.1.4",
     "jwt-simple": "^0.5.6",
-    "mysql": "^2.17.1"
+    "mysql": "^2.17.1",
+    "node-cron": "^2.0.3"
   },
   "devDependencies": {
     "morgan": "^1.9.1",
