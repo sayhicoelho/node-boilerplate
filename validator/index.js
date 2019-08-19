@@ -1,9 +1,10 @@
 const validations = require('./validations')
+const config = require('../config/app')
 const { translateField } = require('../i18n')
 
 const separator = '|'
 
-const validate = async (data, rules, lang = 'en') => {
+const validate = async (data, rules, lang = config.fallbackLang) => {
   const errors = {}
 
   for (let key in rules) {
