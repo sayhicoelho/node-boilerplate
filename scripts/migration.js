@@ -15,9 +15,9 @@
 
 const fs = require('fs')
 const path = require('path')
-const { db } = require('../src/database')
-const orm = require('../src/database/orm')
-const config = require('../src/config')
+const { db } = require('../database')
+const orm = require('../database/orm')
+const config = require('../config')
 const args = process.argv.splice(2)
 const action = args[0]
 
@@ -55,7 +55,6 @@ const migrationsTable = 'migrations'
 const migrationsDir = path.join(
   __dirname,
   '..',
-  'src',
   'database',
   'migrations'
 )

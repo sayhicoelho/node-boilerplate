@@ -7,7 +7,7 @@ const generatedRoutes = {}
 const routes = glob.sync(path.join(__dirname, '**/*', '*Routes.js'))
 
 for (let route of routes) {
-  const fullRouteNamespace = route.split('src/app/')[1]
+  const fullRouteNamespace = route.split('app/')[1]
   const paths = fullRouteNamespace.split('/')
   const version = paths[0]
   const namespace = paths[1]

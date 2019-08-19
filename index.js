@@ -1,14 +1,14 @@
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
-const router = require('./src/routes')
-const config = require('./src/config')
+const router = require('./routes')
+const config = require('./config')
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, 'src', 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(router)
 
 app.disable('x-powered-by')

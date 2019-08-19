@@ -10,7 +10,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { db } = require('../src/database')
+const { db } = require('../database')
 const args = process.argv.splice(2)
 const [action] = args
 
@@ -27,7 +27,7 @@ function run() {
 module.exports = run
 `
 
-const seedsDir = path.join(__dirname, '..', 'src', 'database', 'seeds')
+const seedsDir = path.join(__dirname, '..', 'database', 'seeds')
 
 const actions = {
   async create() {
