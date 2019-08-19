@@ -1,7 +1,7 @@
 const orm = require('../orm')
 
 function up() {
-  return orm.createTable('your_table', {
+  return orm.createTable('permissions', {
     primaryKey: 'id',
     timestamps: true,
     columns: {
@@ -22,7 +22,7 @@ function up() {
 }
 
 function down() {
-  return orm.dropTable('your_table')
+  return orm.dropTable('permissions')
 }
 
 module.exports = {

@@ -1,10 +1,11 @@
 const orm = require('../orm')
+const helpers = require('../../utils/helpers')
 
 async function run() {
   return orm.addRow('users', {
     name: 'Example',
     email: 'example@example.com',
-    password: 'secret',
+    password: await helpers.hash('secret'),
   })
 }
 

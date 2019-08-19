@@ -10,6 +10,14 @@ function up() {
         unsigned: true,
         autoIncrement: true
       },
+      userId: {
+        type: 'int',
+        unsigned: true,
+        foreign: {
+          ref: ['users', 'id'],
+          onDelete: 'cascade',
+        },
+      },
       userAgent: {
         type: 'varchar(255)',
       },

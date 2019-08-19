@@ -15,7 +15,7 @@ function createTable(table, { primaryKey, timestamps, columns }) {
     rawColumns.push(utils.getRawOptions(column, options))
   }
 
-  const sql = `CREATE TABLE ${table} (${rawColumns.join(',')},
+  const sql = `CREATE TABLE IF NOT EXISTS ${table} (${rawColumns.join(',')},
     PRIMARY KEY (${primaryKey})
     ${foreigns.length > 0 ? ', ' + foreigns.join(',') : ''})`
 
@@ -23,7 +23,7 @@ function createTable(table, { primaryKey, timestamps, columns }) {
 }
 
 function dropTable(table) {
-  const sql = `DROP TABLE ${table}`
+  const sql = `DROP TABLE IF EXISTS ${table}`
 
   return utils.query(sql)
 }

@@ -1,3 +1,6 @@
+const bcrypt = require('bcryptjs')
+const config = require('../config')
+
 const replacer = (str, values, prefix = ':') => {
   for (let key in values) {
     const value = values[key]
@@ -30,10 +33,15 @@ const isURL = str => {
   return pattern.test(str)
 }
 
+const hash = async str => {
+  return await bcrypt.hash(str, config.auth.bcryptSalt)
+}
+
 module.exports = {
   replacer,
   isInteger,
   isEmail,
   isHost,
   isURL,
+  hash
 }

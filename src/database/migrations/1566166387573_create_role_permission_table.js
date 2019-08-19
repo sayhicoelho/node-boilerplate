@@ -26,19 +26,19 @@ function up() {
           onDelete: 'cascade',
         },
       },
-      create: {
+      canCreate: {
         type: 'TINYINT(1)',
         nullable: true,
       },
-      read: {
+      canRead: {
         type: 'TINYINT(1)',
         nullable: true,
       },
-      update: {
+      canUpdate: {
         type: 'TINYINT(1)',
         nullable: true,
       },
-      delete: {
+      canDelete: {
         type: 'TINYINT(1)',
         nullable: true,
       },
