@@ -1,7 +1,10 @@
+const Queue = require('bull')
 const { transporter } = require('../services/mailService')
 const { io } = require('../services/socketService')
 
-const handle = ({ data }, done) => {
+const queue = new Queue('email')
+
+queue.process(({ data }, done) => {
   const mailOptions = {
     from: data.from,
     to: data.to,
@@ -14,8 +17,6 @@ const handle = ({ data }, done) => {
   transporter.sendMail(mailOptions, (err, info) => {
     done(err ? new Error(err) : '')
   })
-}
+})
 
-module.exports = {
-  handle,
-}
+module.exports = queue

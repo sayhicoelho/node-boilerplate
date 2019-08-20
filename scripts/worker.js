@@ -1,12 +1,17 @@
-const Queue = require('bull')
-const mailJob = require('../jobs/mailJob')
+const queues = [require('../jobs/mailJob')]
 
-const emailQueue = new Queue('email')
+for (let queue of queues) {
+  queue.on('active', job => {
+    const startedAt = new Date(job.processedOn).toUTCString()
+    console.log(
+      `Processing job ${job.id} on queue ${job.queue.name} at ${startedAt}...`
+    )
+  })
 
-emailQueue.process((job, done) => {
-  console.log(`Processing job ${job.id}...`)
-
-  mailJob.handle(job, done)
-})
-
-emailQueue.on('completed', job => console.log(`Job ${job.id} completed.`))
+  queue.on('completed', job => {
+    const seconds = (job.finishedOn - job.processedOn) / 1000
+    console.log(
+      `Job ${job.id} on queue ${job.queue.name} has been completed in ${seconds} seconds.`
+    )
+  })
+}
