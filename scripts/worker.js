@@ -8,3 +8,5 @@ emailQueue.process((job, done) => {
 
   mailJob.handle(job, done)
 })
+
+emailQueue.on('completed', job => console.log(`Job ${job.id} completed.`))
