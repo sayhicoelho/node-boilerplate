@@ -1,0 +1,34 @@
+{
+  "Hello": "Olá, :name!",
+  "Thank you for registering!": "Obrigado por se registrar!",
+  "Monkeys in the tree": [
+    {
+      "key": "monkeys",
+      "0": "Não há nenhum macaco",
+      "1": "Há um macaco",
+      "2,5": "Há entre dois e cinco macacos",
+      "6,*": "Há :monkeys macacos"
+    },
+    "na árvore",
+    {
+      "key": "people",
+      "0": "nem nenhuma pessoa",
+      "1": "com uma pessoa",
+      "2,*": "com :people pessoas"
+    },
+    "no chão",
+    {
+      "key": "birds",
+      "0": "e nenhum pássaro",
+      "1": "e um pássaro",
+      "2,*": "e :birds pássaros"
+    },
+    "no ar",
+    {
+      "key": "monkeys",
+      "0": "brincando com nenhum macaco!",
+      "1": "brincando com o macaco!",
+      "2,*": "brincando com os :monkeys macacos!"
+    }
+  ]
+}

@@ -4,8 +4,9 @@ const config = require('../config')
 const replacer = (str, values, prefix = ':') => {
   for (let key in values) {
     const value = values[key]
+    const pattern = new RegExp(`${prefix}${key}`, 'g')
 
-    str = str.replace(`${prefix}${key}`, value)
+    str = str.replace(pattern, value)
   }
 
   return str
@@ -37,6 +38,14 @@ const hash = async str => {
   return await bcrypt.hash(str, config.auth.bcryptSalt)
 }
 
+const strFormat = format => {
+  var args = Array.prototype.slice.call(arguments, 1)
+
+  return format.replace(/{(\d+)}/g, function(match, number) {
+    return typeof args[number] != 'undefined' ? args[number] : match
+  })
+}
+
 module.exports = {
   replacer,
   isInteger,
@@ -44,4 +53,5 @@ module.exports = {
   isHost,
   isURL,
   hash,
+  strFormat,
 }

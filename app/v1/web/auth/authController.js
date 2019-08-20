@@ -7,13 +7,24 @@ const login = (req, res) => {
 }
 
 const register = (req, res) => {
+  const { lang } = res.locals
+  const monkeys = 6
+  const people = 8
+  const birds = 10
   const data = {
-    greeting: __('hello', res.locals.lang),
+    greeting: __('Hello', lang, {
+      name: 'Renan',
+    }),
+    monkeys: __('Monkeys in the tree', lang, {
+      monkeys,
+      people,
+      birds,
+    }),
   }
 
   mailService.send(
     'registered@user.com',
-    'Thank you for registering!',
+    __('Thank you for registering!', lang),
     'register',
     data
   )

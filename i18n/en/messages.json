@@ -1,0 +1,34 @@
+{
+  "Hello": "Dear :name!",
+  "Monkeys in the tree": [
+    "There",
+    {
+      "key": "monkeys",
+      "0": "are no monkeys",
+      "1": "is one monkey",
+      "2,5": "are between two or five monkeys",
+      "6,*": "are :monkeys monkeys"
+    },
+    "in the tree",
+    {
+      "key": "people",
+      "0": "without any people",
+      "1": "with one person",
+      "2,*": "with :people people"
+    },
+    "on the floor",
+    {
+      "key": "birds",
+      "0": "and no birds",
+      "1": "and one bird",
+      "2,*": "and :birds birds"
+    },
+    "in the air",
+    {
+      "key": "monkeys",
+      "0": "not playing with a monkey!",
+      "1": "playing with the monkey!",
+      "2,*": "playing with :monkeys monkeys!"
+    }
+  ]
+}
