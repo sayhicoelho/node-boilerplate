@@ -1,11 +1,18 @@
 const moment = require('moment-timezone')
+const config = require('../config')
+const { dateFormats } = require('../i18n')
 
-const getDate = (date, format, timezone = 'UTC') => {
+const format = (
+  date,
+  format,
+  lang = config.app.fallbackLang,
+  timezone = 'UTC'
+) => {
   return moment(date)
     .tz(timezone)
-    .format(format)
+    .format(dateFormats[lang][format])
 }
 
 module.exports = {
-  getDate,
+  format,
 }

@@ -1,13 +1,17 @@
 const mailService = require('../../../../services/mailService')
 const { io } = require('../../../../services/socketService')
 const { __ } = require('../../../../i18n')
+const dateService = require('../../../../services/dateService')
 
 const login = (req, res) => {
   res.json({ success: true })
 }
 
 const register = (req, res) => {
-  const { lang } = res.locals
+  const { lang, timezone } = res.locals
+  const date = new Date()
+  const format = 'datetime'
+  const message = dateService.format(date, format, lang, timezone)
   const monkeys = 6
   const people = 8
   const birds = 10
@@ -31,7 +35,7 @@ const register = (req, res) => {
 
   io.emit('rest message', 'rest message sent')
 
-  res.json({ register: true })
+  res.json({ message: `Registered at ${message}` })
 }
 
 const forgotPassword = (req, res) => {

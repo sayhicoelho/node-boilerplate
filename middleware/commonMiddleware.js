@@ -3,7 +3,7 @@ const config = require('../config')
 
 function handle(req, res, next) {
   const lang = req.header('Content-Language')
-  const timezone = req.header('X-Timezone-Name')
+  const timezone = req.header('X-Timezone')
   const token = req.header('authorization')
 
   res.locals.userAgent = req.get('User-Agent')

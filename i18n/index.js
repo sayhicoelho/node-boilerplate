@@ -16,6 +16,11 @@ const fields = {
   pt: require('./pt/fields'),
 }
 
+const dateFormats = {
+  en: require('./en/dates'),
+  pt: require('./pt/dates'),
+}
+
 const translateField = (field, lang) => {
   return fields[lang][field] || field
 }
@@ -70,6 +75,7 @@ const __ = (key, lang, attributes = null) => {
 module.exports = {
   validations,
   fields,
+  dateFormats,
   translateField,
   __,
 }
