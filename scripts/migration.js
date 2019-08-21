@@ -15,17 +15,17 @@
 
 const fs = require('fs')
 const path = require('path')
-const { db } = require('../lib/database')
-const orm = require('../lib/database/orm')
-const config = require('../lib/config')
+const { db } = require('@database')
+const orm = require('@database/orm')
+const config = require('@config')
 const { prompt } = require('./utils')
 const args = process.argv.splice(2)
 const action = args[0]
 
-const template = `const orm = require('../orm')
+const template = `const orm = require('@database/orm')
 
 function up() {
-  return orm.createTable('your_table', {
+  return orm.createTable('table_name', {
     primaryKey: 'id',
     timestamps: true,
     columns: {
@@ -42,7 +42,7 @@ function up() {
 }
 
 function down() {
-  return orm.dropTable('your_table')
+  return orm.dropTable('table_name')
 }
 
 module.exports = {

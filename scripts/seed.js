@@ -14,7 +14,7 @@ const { prompt } = require('./utils')
 const args = process.argv.splice(2)
 const [action] = args
 
-const template = `const orm = require('../orm')
+const template = `const orm = require('@database/orm')
 
 function run() {
   return orm.addRow('users', {

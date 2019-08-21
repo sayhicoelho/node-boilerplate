@@ -9,5 +9,30 @@
       }
     ]
   ],
-  "plugins": [["@babel/plugin-proposal-class-properties", { "loose": true }]]
+  "plugins": [
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": "./lib",
+        "alias": {
+          "@app": "./lib/app",
+          "@config": "./lib/config",
+          "@database": "./lib/database",
+          "@i18n": "./lib/i18n",
+          "@middleware": "./lib/middleware",
+          "@models": "./lib/models",
+          "@services": "./lib/services",
+          "@utils": "./lib/utils",
+          "@validator": "./lib/validator",
+          "@views": "./views"
+        }
+      }
+    ]
+  ]
 }

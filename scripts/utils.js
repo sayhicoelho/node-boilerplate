@@ -1,5 +1,5 @@
-const config = require('../lib/config')
-const { db } = require('../lib/database')
+const config = require('@config')
+const { db } = require('@database')
 
 async function prompt(callback) {
   if (config.app.env == 'production') {
