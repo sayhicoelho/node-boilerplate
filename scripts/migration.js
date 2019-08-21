@@ -207,12 +207,12 @@ async function execute(bypass = false) {
           timestamps: false,
           columns: {
             id: {
-              type: 'INT',
+              type: 'int',
               unsigned: true,
               autoIncrement: true,
             },
             migration: {
-              type: 'VARCHAR(50)',
+              type: 'varchar(50)',
             },
           },
         })

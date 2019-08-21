@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const config = require('../config')
 
-const replacer = (str, values, prefix = ':') => {
+function replacer(str, values, prefix = ':') {
   for (let key in values) {
     const value = values[key]
     const pattern = new RegExp(`${prefix}${key}`, 'g')
@@ -12,33 +12,33 @@ const replacer = (str, values, prefix = ':') => {
   return str
 }
 
-const isInteger = value => {
+function isInteger(value) {
   return /^\d+$/.test(value)
 }
 
-const isEmail = str => {
+function isEmail(str) {
   const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   return pattern.test(str)
 }
 
-const isHost = str => {
+function isHost(str) {
   const pattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
 
   return pattern.test(str)
 }
 
-const isURL = str => {
+function isURL(str) {
   const pattern = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/
 
   return pattern.test(str)
 }
 
-const hash = async str => {
+async function hash(str) {
   return await bcrypt.hash(str, config.auth.bcryptSalt)
 }
 
-const strFormat = format => {
+function strFormat(format) {
   var args = Array.prototype.slice.call(arguments, 1)
 
   return format.replace(/{(\d+)}/g, function(match, number) {
@@ -46,7 +46,7 @@ const strFormat = format => {
   })
 }
 
-const filename = str => {
+function filename(str) {
   const splitted = str.split('.')
   const length = splitted.length
 
@@ -66,7 +66,7 @@ const filename = str => {
   }
 }
 
-const slugify = str => {
+function slugify(str) {
   str = str || ''
   const a =
     'àáäãâèéëêìíïîòóöõôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;άαβγδεέζήηθιίϊΐκλμνξοόπρσςτυϋύΰφχψωώ'

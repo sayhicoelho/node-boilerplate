@@ -1,3 +1,5 @@
-const handle = (req, res, next) => next()
+function handle(req, res, next) {
+  next()
+}
 
 module.exports = handle

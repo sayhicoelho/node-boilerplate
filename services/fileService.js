@@ -36,7 +36,7 @@ const uploadTypes = {
   pdf: ['application/pdf'],
 }
 
-const upload = (type, mimetypes = null) => {
+function upload(type, mimetypes = null) {
   if (type in uploadTypes) {
     mimetypes = uploadTypes[type]
   }

@@ -1,4 +1,4 @@
-const handle = socket => {
+function handle(socket) {
   socket.on('join', room => {
     socket.join(room)
     console.log(`${socket.id} joined to ${room}`)

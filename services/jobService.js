@@ -1,6 +1,6 @@
 const Queue = require('bull')
 
-const dispatch = (to, data) => {
+function dispatch(to, data) {
   const queue = new Queue(to)
 
   queue.add(data)

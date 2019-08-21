@@ -10,7 +10,7 @@ const logger = winston.createLogger({
   transports: [transport],
 })
 
-const handleLog = (message, level) => {
+function handleLog(message, level) {
   const logData = {
     time: dateService.format(Date.now(), 'YYYY-MM-DD HH:mm:ss'),
     message,
@@ -19,9 +19,17 @@ const handleLog = (message, level) => {
   return logger[level](logData)
 }
 
-const info = message => handleLog(message, 'info')
-const error = message => handleLog(message, 'error')
-const warn = message => handleLog(message, 'warn')
+function info(message) {
+  return handleLog(message, 'info')
+}
+
+function error(message) {
+  return handleLog(message, 'error')
+}
+
+function warn(message) {
+  return handleLog(message, 'warn')
+}
 
 module.exports = {
   info,

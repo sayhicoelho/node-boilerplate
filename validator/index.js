@@ -4,7 +4,7 @@ const { translateField } = require('../i18n')
 
 const separator = '|'
 
-const validate = async (data, rules, lang = config.fallbackLang) => {
+async function validate(data, rules, lang = config.fallbackLang) {
   const errors = {}
 
   for (let key in rules) {

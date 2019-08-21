@@ -1,6 +1,6 @@
 const validator = require('../../../../validator')
 
-const validate = (req, res, next) => {
+function validate(req, res, next) {
   const rules = {
     avatar: 'required',
   }

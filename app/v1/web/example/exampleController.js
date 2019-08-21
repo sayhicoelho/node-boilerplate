@@ -5,7 +5,7 @@ const { io } = require('../../../../services/socketService')
 const { __ } = require('../../../../i18n')
 const User = require('../../../../models/User')
 
-const email = (req, res) => {
+function email(req, res) {
   const { lang, timezone } = res.locals
   const monkeys = 6
   const people = 8
@@ -38,7 +38,7 @@ const email = (req, res) => {
   res.json({ message: `Registered at ${message}` })
 }
 
-const upload = (req, res) => {
+function upload(req, res) {
   const { filename } = req.file
 
   // TODO: Add filename to database and attach it to authenticated user
@@ -46,7 +46,7 @@ const upload = (req, res) => {
   res.status(201).json({ filename })
 }
 
-const notification = async (req, res) => {
+async function notification(req, res) {
   const headings = {
     en: 'Node.js notification',
   }
@@ -65,7 +65,7 @@ const notification = async (req, res) => {
   }
 }
 
-const findUser = async (req, res) => {
+async function findUser(req, res) {
   const { id } = req.params
   const user = await User.findById(id)
 

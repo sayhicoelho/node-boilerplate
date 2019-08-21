@@ -10,7 +10,7 @@ const client = new OneSignal.Client({
   },
 })
 
-const sendNotification = (headings, contents, included_segments) => {
+function sendNotification(headings, contents, included_segments) {
   return new Promise((resolve, reject) => {
     const notification = new OneSignal.Notification({
       headings,

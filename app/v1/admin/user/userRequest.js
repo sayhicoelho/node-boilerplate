@@ -1,6 +1,6 @@
 const validator = require('../../../../validator')
 
-const validate = (req, res, next) => {
+function validate(req, res, next) {
   const rules = {
     name: 'required|string|max:100',
     email: 'required|email|max:100',
@@ -14,7 +14,9 @@ const validate = (req, res, next) => {
     .catch(errors => res.status(422).json(errors))
 }
 
-const prepareForValidation = (req, res, next) => next()
+function prepareForValidation(req, res, next) {
+  next()
+}
 
 module.exports = {
   validate,

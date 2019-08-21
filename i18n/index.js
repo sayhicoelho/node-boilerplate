@@ -21,11 +21,11 @@ const dateFormats = {
   pt: require('./pt/dates'),
 }
 
-const translateField = (field, lang) => {
+function translateField(field, lang) {
   return fields[lang][field] || field
 }
 
-const __ = (key, lang, attributes = null) => {
+function __(key, lang, attributes = null) {
   let message = messages[lang][key]
 
   if (!message) {

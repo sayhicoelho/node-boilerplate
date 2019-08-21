@@ -2,11 +2,15 @@ let auto_increment = 0
 
 const posts = []
 
-const getAll = () => posts
+function getAll() {
+  return posts
+}
 
-const findById = id => posts.find(u => u.id == id)
+function findById(id) {
+  return posts.find(u => u.id == id)
+}
 
-const create = data => {
+function create(data) {
   const post = { ...data, id: ++auto_increment }
 
   posts.push(post)
@@ -14,7 +18,7 @@ const create = data => {
   return post
 }
 
-const deleteById = id => {
+function deleteById(id) {
   const index = posts.findIndex(p => p.id == id)
 
   if (index != -1) {

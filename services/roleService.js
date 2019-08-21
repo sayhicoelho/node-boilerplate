@@ -2,11 +2,15 @@ let auto_increment = 0
 
 const roles = []
 
-const getAll = () => roles
+function getAll() {
+  return roles
+}
 
-const findById = id => roles.find(u => u.id == id)
+function findById(id) {
+  return roles.find(u => u.id == id)
+}
 
-const create = data => {
+function create(data) {
   const role = { ...data, id: ++auto_increment }
 
   roles.push(role)
@@ -14,7 +18,7 @@ const create = data => {
   return role
 }
 
-const deleteById = id => {
+function deleteById(id) {
   const index = roles.findIndex(p => p.id == id)
 
   if (index != -1) {

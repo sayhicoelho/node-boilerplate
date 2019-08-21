@@ -2,11 +2,15 @@ let auto_increment = 0
 
 const users = []
 
-const getAll = () => users
+function getAll() {
+  return users
+}
 
-const findById = id => users.find(u => u.id == id)
+function findById(id) {
+  return users.find(u => u.id == id)
+}
 
-const create = data => {
+function create(data) {
   const user = { ...data, id: ++auto_increment }
 
   users.push(user)
@@ -14,7 +18,7 @@ const create = data => {
   return user
 }
 
-const deleteById = id => {
+function deleteById(id) {
   const index = users.findIndex(p => p.id == id)
 
   if (index != -1) {
