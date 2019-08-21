@@ -1,10 +1,18 @@
 const multer = require('multer')
 const config = require('../config')
+const helpers = require('../utils/helpers')
 const { __ } = require('../i18n')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, config.storage.uploadsDir),
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
+  filename: (req, file, cb) => {
+    const filename = helpers.filename(file.originalname)
+    const now = Date.now()
+    const safename = helpers.slugify(filename.name)
+    const ext = filename.ext
+
+    cb(null, `${now}-${safename}.${ext}`)
+  },
 })
 
 const limits = {

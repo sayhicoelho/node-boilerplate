@@ -46,6 +46,52 @@ const strFormat = format => {
   })
 }
 
+const filename = str => {
+  const splitted = str.split('.')
+  const length = splitted.length
+
+  if (length == 1) {
+    return {
+      name: str,
+      ext: null,
+    }
+  }
+
+  const ext = splitted[length - 1]
+  splitted.splice(-1)
+
+  return {
+    name: splitted.join('.'),
+    ext,
+  }
+}
+
+const slugify = str => {
+  str = str || ''
+  const a =
+    'àáäãâèéëêìíïîòóöõôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;άαβγδεέζήηθιίϊΐκλμνξοόπρσςτυϋύΰφχψωώ'
+  const b =
+    'aaaaaeeeeiiiiooooouuuuncsyoarsnpwgnmuxzh------aavgdeeziitiiiiklmnxooprsstyyyyfhpoo'
+  const p = new RegExp(a.split('').join('|'), 'g')
+
+  return str
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/ου/g, 'ou')
+    .replace(/ευ/g, 'eu')
+    .replace(/θ/g, 'th')
+    .replace(/ψ/g, 'ps')
+    .replace(/\//g, '-')
+    .replace(/\s+/g, '-')
+    .replace(p, c => b.charAt(a.indexOf(c)))
+    .replace(/&/g, '-and-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
+}
+
 module.exports = {
   replacer,
   isInteger,
@@ -54,4 +100,6 @@ module.exports = {
   isURL,
   hash,
   strFormat,
+  filename,
+  slugify,
 }
