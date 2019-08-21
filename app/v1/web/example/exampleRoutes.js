@@ -6,6 +6,7 @@ const { upload } = require('../../../../services/fileService')
 const router = Router()
 
 router.post('/example/email', exampleController.email)
+router.post('/example/notification', exampleController.notification)
 
 router.post(
   '/example/upload',

@@ -1,5 +1,6 @@
 const mailService = require('../../../../services/mailService')
 const dateService = require('../../../../services/dateService')
+const notificationService = require('../../../../services/notificationService')
 const { io } = require('../../../../services/socketService')
 const { __ } = require('../../../../i18n')
 
@@ -44,7 +45,27 @@ const upload = (req, res) => {
   res.status(201).json({ filename })
 }
 
+const notification = async (req, res) => {
+  const headings = {
+    en: 'Node.js notification',
+  }
+
+  const contents = {
+    en: "This is the notification's body.",
+  }
+
+  const segments = ['Active Users', 'Inactive Users']
+
+  try {
+    await notificationService.sendNotification(headings, contents, segments)
+    res.json({ message: 'Notifications sent.' })
+  } catch ({ message }) {
+    res.status(500).json({ message })
+  }
+}
+
 module.exports = {
   email,
   upload,
+  notification,
 }

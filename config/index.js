@@ -7,4 +7,5 @@ module.exports = {
   mail: require('./mail'),
   storage: require('./storage'),
   logging: require('./logging'),
+  onesignal: require('./onesignal'),
 }
