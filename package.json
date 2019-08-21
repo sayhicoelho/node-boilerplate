@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec \"babel-node lib\"",
+    "dev": "nodemon --exec \"babel-node lib/server\"",
     "dev:cron": "babel-node lib/cron",
     "dev:worker": "babel-node lib/worker",
     "build": "rimraf dist && babel lib -s -D -d dist",
-    "start": "node dist",
+    "start": "node dist/server",
     "start:cron": "node dist/cron",
     "start:worker": "node dist/worker",
     "migration": "babel-node scripts/migration",
