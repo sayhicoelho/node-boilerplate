@@ -1,6 +1,7 @@
 {
   "Hello": "Dear :name!",
-  "Only files are allowed": "Only :mimetypes files are allowed",
+  "Only files are allowed": "Only :mimetypes files are allowed.",
+  "The file size must be lower than": "The file size must be lower than :mb MB.",
   "Monkeys in the tree": [
     "There",
     {

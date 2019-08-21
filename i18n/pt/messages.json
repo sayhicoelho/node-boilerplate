@@ -1,9 +1,10 @@
 {
   "Hello": "Olá, :name!",
   "Thank you for registering!": "Obrigado por se registrar!",
-  "An unexpected error has ocurred": "Houve um erro inesperado",
-  "Unexpected field": "Campo inválido",
-  "Only files are allowed": "Apenas arquivos do tipo :mimetypes são permitidos",
+  "An unexpected error has ocurred": "Houve um erro inesperado.",
+  "Unexpected field": "Campo inválido.",
+  "Only files are allowed": "Apenas arquivos do tipo :mimetypes são permitidos.",
+  "The file size must be lower than": "O tamanho do arquivo tem que menor do que :mb MB.",
   "Monkeys in the tree": [
     {
       "key": "monkeys",

@@ -6,4 +6,5 @@ module.exports = {
   database: require('./database'),
   mail: require('./mail'),
   storage: require('./storage'),
+  logging: require('./logging'),
 }

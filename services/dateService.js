@@ -10,7 +10,7 @@ const format = (
 ) => {
   return moment(date)
     .tz(timezone)
-    .format(dateFormats[lang][format])
+    .format(dateFormats[lang][format] || format)
 }
 
 module.exports = {

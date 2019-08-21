@@ -1,5 +1,5 @@
 {
-  "required": "The :attribute is required",
+  "required": "The :attribute is required.",
   "string": "The :attribute must be a string.",
   "integer": "The :attribute must be an integer.",
   "email": "The :attribute must be an email.",
