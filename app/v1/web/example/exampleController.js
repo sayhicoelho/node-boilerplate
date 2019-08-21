@@ -3,6 +3,7 @@ const dateService = require('../../../../services/dateService')
 const notificationService = require('../../../../services/notificationService')
 const { io } = require('../../../../services/socketService')
 const { __ } = require('../../../../i18n')
+const User = require('../../../../models/User')
 
 const email = (req, res) => {
   const { lang, timezone } = res.locals
@@ -64,8 +65,16 @@ const notification = async (req, res) => {
   }
 }
 
+const findUser = async (req, res) => {
+  const { id } = req.params
+  const user = await User.findById(id)
+
+  res.json({ user })
+}
+
 module.exports = {
   email,
   upload,
   notification,
+  findUser,
 }

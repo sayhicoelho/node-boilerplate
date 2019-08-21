@@ -109,6 +109,12 @@ function dropColumns(table, columns) {
   return utils.query(sql)
 }
 
+function select(table, columns = ['*'], where = null, values = []) {
+  const sql = `SELECT ${columns.join(',')} FROM ${table} ${where}`
+
+  return utils.query(sql, values)
+}
+
 function rawQuery(sql, values = []) {
   return utils.query(sql, values)
 }
@@ -122,5 +128,6 @@ module.exports = {
   addRows,
   dropRow,
   dropColumns,
+  select,
   rawQuery,
 }

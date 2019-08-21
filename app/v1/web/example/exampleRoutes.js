@@ -7,6 +7,7 @@ const router = Router()
 
 router.post('/example/email', exampleController.email)
 router.post('/example/notification', exampleController.notification)
+router.get('/example/find-user/:id', exampleController.findUser)
 
 router.post(
   '/example/upload',
