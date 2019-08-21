@@ -22,7 +22,7 @@ const extensions = {
 }
 
 const uploadTypes = {
-  img: config.storage.validImages,
+  image: config.storage.validImages,
   csv: ['text/csv'],
   txt: ['text/plain'],
   pdf: ['application/pdf'],

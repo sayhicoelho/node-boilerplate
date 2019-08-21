@@ -17,14 +17,6 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-/**
- * Add mail on queue to be sent.
- *
- * @param string to
- * @param string subject
- * @param string html
- * @returns void
- */
 function send(to, subject, view, data) {
   const html = views.emails[view](data)
 
