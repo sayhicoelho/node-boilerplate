@@ -5,4 +5,5 @@ module.exports = {
   auth: require('./auth'),
   database: require('./database'),
   mail: require('./mail'),
+  storage: require('./storage'),
 }

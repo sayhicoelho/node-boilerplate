@@ -50,10 +50,19 @@ const verifyEmail = (req, res) => {
   res.json({ success: true })
 }
 
+const uploadAvatar = (req, res) => {
+  const { filename } = req.file
+
+  // TODO: Add filename to database and attach it to authenticated user
+
+  res.status(201).json({ filename })
+}
+
 module.exports = {
   login,
   register,
   forgotPassword,
   resetPassword,
   verifyEmail,
+  uploadAvatar,
 }

@@ -2,19 +2,19 @@ const validator = require('../../../../validator')
 
 const validate = (req, res, next) => {
   const rules = {
-    name: 'required|string|max:100',
-    slug: 'required|slug|max:100',
+    avatar: 'required',
+  }
+
+  const data = {
+    avatar: req.file,
   }
 
   validator
-    .validate(req.body, rules, res.locals.lang)
+    .validate(data, rules, res.locals.lang)
     .then(next)
     .catch(errors => res.status(422).json(errors))
 }
 
-const prepareForValidation = (req, res, next) => next()
-
 module.exports = {
   validate,
-  prepareForValidation,
 }

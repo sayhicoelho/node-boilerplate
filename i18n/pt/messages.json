@@ -1,6 +1,8 @@
 {
   "Hello": "Olá, :name!",
   "Thank you for registering!": "Obrigado por se registrar!",
+  "An unexpected error has ocurred": "Houve um erro inesperado",
+  "Unexpected field": "Campo inválido",
   "Monkeys in the tree": [
     {
       "key": "monkeys",

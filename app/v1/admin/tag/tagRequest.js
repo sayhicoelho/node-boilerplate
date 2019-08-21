@@ -10,7 +10,7 @@ const validate = (req, res, next) => {
   }
 
   validator
-    .validate(req.body, rules)
+    .validate(req.body, rules, res.locals.lang)
     .then(next)
     .catch(errors => res.status(422).json(errors))
 }
