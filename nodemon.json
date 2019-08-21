@@ -1,7 +1,3 @@
 {
-  "ignore": [
-    "scripts/*",
-    "jobs/*",
-    "tasks/*"
-  ]
+  "ignore": ["scripts/*", "lib/jobs/*", "lib/tasks/*"]
 }

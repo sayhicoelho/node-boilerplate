@@ -10,8 +10,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { db } = require('../database')
-const config = require('../config')
+const { prompt } = require('./utils')
 const args = process.argv.splice(2)
 const [action] = args
 
@@ -28,7 +27,7 @@ function run() {
 module.exports = run
 `
 
-const seedsDir = path.join(__dirname, '..', 'database', 'seeds')
+const seedsDir = path.join(__dirname, '..', 'lib', 'database', 'seeds')
 
 const actions = {
   async create() {
@@ -49,8 +48,6 @@ const actions = {
     } else {
       console.error('Invalid seed name.')
     }
-
-    db.end()
   },
   async populate() {
     return new Promise(async resolve => {
@@ -69,15 +66,11 @@ const actions = {
           console.error(`The seed ${name} does not exists`)
         }
 
-        db.end()
-
         resolve()
       } else {
         await require(path.join(seedsDir)).populate()
 
         console.log(`Seed(s) populated`)
-
-        db.end()
 
         resolve()
       }
@@ -85,40 +78,14 @@ const actions = {
   },
 }
 
-async function execute(bypass = false) {
-  if (!bypass && config.app.env == 'production') {
-    console.log(
-      "Caution! You're running in production mode. Are you sure you want to proceed (yes|no)?"
-    )
-
-    const ask = async () => {
-      let answer = process.stdin.read()
-
-      if (answer) {
-        answer = answer.toString().trim()
-
-        if (answer == 'yes') {
-          await execute(true)
-        } else {
-          db.end()
-        }
-
-        process.exit(0)
-      }
-    }
-
-    process.stdin.on('readable', ask)
+async function execute() {
+  if (action in actions) {
+    await actions[action]()
   } else {
-    if (action in actions) {
-      await actions[action]()
-    } else {
-      console.error(
-        `Action ${action} is not valid. Did you mean create|populate?`
-      )
-
-      db.end()
-    }
+    console.error(
+      `Action ${action} is not valid. Did you mean create|populate?`
+    )
   }
 }
 
-execute()
+prompt(execute)

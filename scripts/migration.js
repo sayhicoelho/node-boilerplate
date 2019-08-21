@@ -15,9 +15,10 @@
 
 const fs = require('fs')
 const path = require('path')
-const { db } = require('../database')
-const orm = require('../database/orm')
-const config = require('../config')
+const { db } = require('../lib/database')
+const orm = require('../lib/database/orm')
+const config = require('../lib/config')
+const { prompt } = require('./utils')
 const args = process.argv.splice(2)
 const action = args[0]
 
@@ -52,7 +53,13 @@ module.exports = {
 
 const migrationsTable = 'migrations'
 
-const migrationsDir = path.join(__dirname, '..', 'database', 'migrations')
+const migrationsDir = path.join(
+  __dirname,
+  '..',
+  'lib',
+  'database',
+  'migrations'
+)
 
 const actions = {
   async create() {
@@ -94,21 +101,20 @@ function migrate(param) {
     const force = args[1] ? args[1] == '--force' : false
 
     if (param == 'down' && force) {
-      await orm.rawQuery('SET FOREIGN_KEY_CHECKS = 0')
+      await orm.disableForeignKeyChecks()
 
-      const sql = `SELECT table_name FROM information_schema.tables WHERE table_schema = ?`
-      const result = await orm.rawQuery(sql, [config.database.database])
+      const tables = await orm.getAllTables(config.database.database)
 
-      for (let table of result) {
+      for (let table of tables) {
         const name = table.table_name
-        await orm.rawQuery(`DROP TABLE IF EXISTS ${name}`)
+        await orm.dropTable(name)
 
         console.log(`Table ${name} has been removed`)
       }
 
-      await orm.rawQuery('SET FOREIGN_KEY_CHECKS = 1')
+      await orm.enableForeignKeyChecks()
 
-      console.log(`${result.length} table(s) removed`)
+      console.log(`${tables.length} table(s) removed`)
 
       return resolve()
     } else {
@@ -124,13 +130,11 @@ function migrate(param) {
         for (let file of files) {
           const migration = require(path.join(migrationsDir, file))
 
-          const result = await orm.checkIfExists(
+          const { rowsCount } = await orm.checkIfExists(
             migrationsTable,
             'WHERE migration = ?',
             [file]
           )
-
-          const { rowsCount } = result[0]
 
           if (
             (param == 'up' && rowsCount == 0) ||
@@ -168,65 +172,37 @@ function migrate(param) {
   })
 }
 
-async function execute(bypass = false) {
-  if (!bypass && config.app.env == 'production') {
-    console.log(
-      "Caution! You're running in production mode. Are you sure you want to proceed (yes|no)?"
+async function execute() {
+  if (action in actions) {
+    const { exists } = await orm.checkIfExists(
+      'information_schema.TABLES',
+      'WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
+      [config.database.database, migrationsTable]
     )
 
-    const ask = async () => {
-      let answer = process.stdin.read()
-
-      if (answer) {
-        answer = answer.toString().trim()
-
-        if (answer == 'yes') {
-          await execute(true)
-        } else {
-          db.end()
-        }
-
-        process.exit(0)
-      }
-    }
-
-    process.stdin.on('readable', ask)
-  } else {
-    if (action in actions) {
-      const result = await orm.checkIfExists(
-        'information_schema.TABLES',
-        'WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
-        [config.database.database, migrationsTable]
-      )
-
-      const { rowsCount } = result[0]
-
-      if (rowsCount === 0) {
-        await orm.createTable(migrationsTable, {
-          primaryKey: 'id',
-          timestamps: false,
-          columns: {
-            id: {
-              type: 'int',
-              unsigned: true,
-              autoIncrement: true,
-            },
-            migration: {
-              type: 'varchar(50)',
-            },
+    if (exists) {
+      await orm.createTable(migrationsTable, {
+        primaryKey: 'id',
+        timestamps: false,
+        columns: {
+          id: {
+            type: 'int',
+            unsigned: true,
+            autoIncrement: true,
           },
-        })
-      }
-
-      await actions[action]()
-    } else {
-      console.error(
-        `Action ${action} is not valid. Did you mean create|up|down|reset?`
-      )
-
-      db.end()
+          migration: {
+            type: 'varchar(50)',
+          },
+        },
+      })
     }
+
+    await actions[action]()
+  } else {
+    console.error(
+      `Action ${action} is not valid. Did you mean create|up|down|reset?`
+    )
   }
 }
 
-execute()
+prompt(execute)

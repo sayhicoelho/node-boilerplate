@@ -4,12 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index",
-    "start": "node index",
-    "cron": "node scripts/cron",
-    "worker": "node scripts/worker",
-    "migration": "node scripts/migration",
-    "seed": "node scripts/seed",
+    "dev": "nodemon --exec \"babel-node lib --presets @babel/env\"",
+    "dev:cron": "babel-node lib/cron --presets @babel/env",
+    "dev:worker": "babel-node lib/worker --presets @babel/env",
+    "build": "rimraf dist && babel lib -s -D -d dist --presets @babel/env",
+    "start": "node dist",
+    "start:cron": "node dist/cron",
+    "start:worker": "node dist/worker",
+    "migration": "babel-node scripts/migration --presets @babel/env",
+    "seed": "babel-node scripts/seed --presets @babel/env",
     "format": "prettier --write \"**/*.js\""
   },
   "dependencies": {
@@ -34,8 +37,14 @@
     "winston-daily-rotate-file": "^3.10.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0"
   }
 }
