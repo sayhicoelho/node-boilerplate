@@ -1,5 +1,6 @@
 {
   "Hello": "Dear :name!",
+  "Only files are allowed": "Only :mimetypes files are allowed",
   "Monkeys in the tree": [
     "There",
     {

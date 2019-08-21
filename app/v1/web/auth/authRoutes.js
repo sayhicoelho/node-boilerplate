@@ -2,7 +2,7 @@ const { Router } = require('express')
 const authController = require('./authController')
 const registerRequest = require('./registerRequest')
 const uploadAvatarRequest = require('./uploadAvatarRequest')
-const { image: upload } = require('../../../../services/uploadService')
+const { upload } = require('../../../../services/fileService')
 
 const router = Router()
 
@@ -13,7 +13,7 @@ router.post('/resetPassword', authController.resetPassword)
 router.post('/verifyEmail', authController.verifyEmail)
 router.post(
   '/uploadAvatar',
-  upload.single('avatar'),
+  upload('img').single('avatar'),
   uploadAvatarRequest.validate,
   authController.uploadAvatar
 )

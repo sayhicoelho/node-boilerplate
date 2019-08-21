@@ -3,6 +3,7 @@
   "Thank you for registering!": "Obrigado por se registrar!",
   "An unexpected error has ocurred": "Houve um erro inesperado",
   "Unexpected field": "Campo inválido",
+  "Only files are allowed": "Apenas arquivos do tipo :mimetypes são permitidos",
   "Monkeys in the tree": [
     {
       "key": "monkeys",
