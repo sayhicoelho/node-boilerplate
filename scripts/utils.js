@@ -1,7 +1,7 @@
-const config = require('@config')
-const { db } = require('@database')
+import config from '@config'
+import { db } from '@database'
 
-async function prompt(callback) {
+export async function prompt(callback) {
   if (config.app.env == 'production') {
     console.log(
       "Caution! You're running in production mode. Are you sure you want to proceed (yes|no)?"
@@ -28,8 +28,4 @@ async function prompt(callback) {
     await callback()
     db.end()
   }
-}
-
-module.exports = {
-  prompt,
 }

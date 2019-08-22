@@ -13,18 +13,17 @@
  * > yarn migration reset --step-=1
  */
 
-const fs = require('fs')
-const path = require('path')
-const { db } = require('@database')
-const orm = require('@database/orm')
-const config = require('@config')
-const { prompt } = require('./utils')
+import fs from 'fs'
+import path from 'path'
+import * as orm from '@database/orm'
+import config from '@config'
+import { prompt } from './utils'
+
 const args = process.argv.splice(2)
 const action = args[0]
+const template = `import * as orm from '@database/orm'
 
-const template = `const orm = require('@database/orm')
-
-function up() {
+export function up() {
   return orm.createTable('table_name', {
     primaryKey: 'id',
     timestamps: true,
@@ -41,13 +40,8 @@ function up() {
   })
 }
 
-function down() {
+export function down() {
   return orm.dropTable('table_name')
-}
-
-module.exports = {
-  up,
-  down,
 }
 `
 
@@ -75,24 +69,16 @@ const actions = {
     } else {
       console.error('Invalid migration name.')
     }
-
-    db.end()
   },
   async up() {
     await migrate('up')
-
-    db.end()
   },
   async down() {
     await migrate('down')
-
-    db.end()
   },
   async reset() {
     await migrate('down')
     await migrate('up')
-
-    db.end()
   },
 }
 
@@ -100,9 +86,9 @@ function migrate(param) {
   return new Promise(async resolve => {
     const force = args[1] ? args[1] == '--force' : false
 
-    if (param == 'down' && force) {
-      await orm.disableForeignKeyChecks()
+    await orm.disableForeignKeyChecks()
 
+    if (param == 'down' && force) {
       const tables = await orm.getAllTables(config.database.database)
 
       for (let table of tables) {
@@ -112,11 +98,9 @@ function migrate(param) {
         console.log(`Table ${name} has been removed`)
       }
 
-      await orm.enableForeignKeyChecks()
-
       console.log(`${tables.length} table(s) removed`)
 
-      return resolve()
+      resolve()
     } else {
       const step = args[1] ? args[1].replace('--step=', '') : null
 
@@ -169,6 +153,8 @@ function migrate(param) {
         resolve()
       })
     }
+
+    await orm.enableForeignKeyChecks()
   })
 }
 
@@ -180,7 +166,7 @@ async function execute() {
       [config.database.database, migrationsTable]
     )
 
-    if (exists) {
+    if (!exists) {
       await orm.createTable(migrationsTable, {
         primaryKey: 'id',
         timestamps: false,

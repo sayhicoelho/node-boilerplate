@@ -8,23 +8,22 @@
  * > yarn populate --name=addUsersTableSeeder
  */
 
-const fs = require('fs')
-const path = require('path')
-const { prompt } = require('./utils')
+import fs from 'fs'
+import path from 'path'
+import { prompt } from './utils'
+
 const args = process.argv.splice(2)
 const [action] = args
 
-const template = `const orm = require('@database/orm')
+const template = `import * as orm from '@database/orm'
 
-function run() {
-  return orm.addRow('users', {
+export async function run() {
+  await orm.addRow('users', {
     name: 'Example',
     email: 'example@example.com',
     password: 'secret',
   })
 }
-
-module.exports = run
 `
 
 const seedsDir = path.join(__dirname, '..', 'lib', 'database', 'seeds')
@@ -59,7 +58,7 @@ const actions = {
         const exists = fs.existsSync(filePath)
 
         if (exists) {
-          await require(filePath)()
+          await require(filePath).run()
 
           console.log(`${seed} populated`)
         } else {
